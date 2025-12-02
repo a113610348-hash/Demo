@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旅遊平台表單</title>
+</head>
 
+<body>
+  <h2>🌴 旅遊平台 - 行程報名表</h2>
+
+  <form id="travelForm">
+      <fieldset>
+          <h3>👤 個人資料</h3>
+
+          <label>*姓名：</label>
+          <input type="text" id="name" required><br><br>
+
+          <label>*Email：</label>
+          <input type="email" id="email" required><br><br>
+
+          <label>*電話：</label>
+          <input type="tel" id="phone" required><br><br>
+      </fieldset>
+
+      <br>
+
+      <fieldset>
+          <h3>🧳 旅遊資訊</h3>
+
+          <label>旅遊地點：</label>
+          <select id="destination" required>
+              <option value="">請選擇</option>
+              <option value="日本東京">日本東京</option>
+              <option value="韓國首爾">韓國首爾</option>
+              <option value="泰國曼谷">泰國曼谷</option>
+              <option value="台灣花蓮">台灣花蓮</option>
+          </select><br><br>
+
+          <label>旅遊天數：</label>
+          <input type="radio" name="days" value="3天2夜">3天2夜
+          <input type="radio" name="days" value="5天4夜">5天4夜
+          <input type="radio" name="days" value="7天6夜">7天6夜
+          <br><br>
+
+          <label>旅遊方式：</label>
+          <input type="checkbox" name="type" value="自由行">自由行
+          <input type="checkbox" name="type" value="跟團">跟團
+          <input type="checkbox" name="type" value="半自助">半自助
+          <br><br>
+
+          <label>*出發日期：</label>
+          <input type="date" id="travelDate" required><br><br>
+ 
+          <label>備註：</label>
+          <input type="text" id="Remark"><br><br>
+      </fieldset>
+          <br>
+          <input type="button" value="送出資料" onclick="showInfo()">
+          <input type="reset" value="清除">
+  </form>
+
+  <script>
+    function showInfo() {
+
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+
+      var destination = document.getElementById("destination").value;
+
+      var daysElement = document.querySelector('input[name="days"]:checked');
+      var days = daysElement ? daysElement.value : "未選擇";
+
+      var typeElements = document.querySelectorAll('input[name="type"]:checked');
+      var typeValues = [];
+      for (var i = 0; i < typeElements.length; i++) {
+        typeValues.push(typeElements[i].value);
+      }
+       var typeText = typeValues.length > 0 ? typeValues.join("、") : "未選擇";
+
+       var travelDate = document.getElementById("travelDate").value;
+
+
+       var Remark = document.getElementById("Remark").value;
+        if (!Remark) {
+            var Remark="無"
+        }
+
+        if (!name || !email || !phone || !destination || !travelDate) {
+        alert("⚠️ 請完整填寫所有必填項目！");
+        return;
+      }
+
+      alert(
+        "🧳 旅遊資訊：" + "\n" +
+        "地點：" + destination + "\n" +
+        "天數：" + days + "\n" +
+        "方式：" + typeText + "\n" +
+        "出發日期：" + travelDate + "\n" +
+        "備註:" + Remark +"\n\n"+
+        "👤 個人資料：" + "\n" +
+        "姓名：" + name + "\n" +
+        "Email：" + email + "\n" +
+        "電話：" + phone
+      );
+    }
+  </script>
+</body>
+</html>
